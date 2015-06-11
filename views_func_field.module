@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * views_func_field.module
+ */
+
+/**
+ * Implements hook_help().
+ */
+function views_func_field_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#views_func_field':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Views Function Field module provides a new Views Field type that displays the results of a function as the value for a field. First, you must declare a function as executable by implementing <strong>hook_views_func_field_function()</strong>. Next, add a field to your View selecting the <strong>Global: Views Function Field</strong>. Select your function in the <strong>Available Functions</strong> drop-down. If the function takes any arguments, you can specify those in the <strong>Function Arguments</strong> textarea a, one argument per line. <i>Note: You may use "Replacement Patterns"to declare function arguments.</i>') . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function views_func_field_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function views_func_field_views_data() {
+
+  $data['views']['views_func_field'] = array(
+    'field' => array(
+      'title' => t('Views Function Field'),
+      'help' => t('Returns the results of a function'),
+      'handler' => 'views_func_field_handler_function',
+    ),
+  );
+  return $data;
+}

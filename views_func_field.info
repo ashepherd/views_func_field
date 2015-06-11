@@ -1,0 +1,9 @@
+name = Views Function Field
+description = Execute a function whose result will be displayed as a field.
+core = 7.x
+package = Views
+version = 7.x-1.0
+
+dependencies[] = views
+
+files[] = views/handlers/views_handler_views_func_field_function.inc
