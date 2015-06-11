@@ -10,40 +10,40 @@
  */
 class views_func_field_handler_function extends views_handler_field_custom {
 
-	function query() {
+  function query() {
     // Do nothing.
   }
 
   function option_definition() {
-  	$options = parent::option_definition();
+    $options = parent::option_definition();
 
-  	$options['views_func_field_function'] = array(
+    $options['views_func_field_function'] = array(
       'default' => '',
       'translatable' => FALSE,
     );
 
-	  return $options;
+    return $options;
   }
 
   function options_form(&$form, &$form_state) {
-  	parent::options_form($form, $form_state);
+    parent::options_form($form, $form_state);
 
-  	$functions = array();
-	  foreach (module_implements('views_func_field_function') as $module) {
-	    $result = module_invoke($module, 'views_func_field_function');
-	    foreach($result as $function) {
-	    	$functions[$function] = $module . ': ' . $function;
-	    }
-	  }
+    $functions = array();
+    foreach (module_implements('views_func_field_function') as $module) {
+      $result = module_invoke($module, 'views_func_field_function');
+      foreach($result as $function) {
+	$functions[$function] = $module . ': ' . $function;
+      }
+    }
   	
-  	$form['views_func_field_function'] = array(
+    $form['views_func_field_function'] = array(
       '#weight' => 0,
-	    '#title' => t('Available Functions'),
-	    '#options' => $functions,
-	    '#type' => 'select',
-	    '#default_value' => $this->options['views_func_field_function'],
-	    '#description' => t('Choose the function to execute. <i>Declare a function by implementing hook_views_func_field_function()</i>.'),
-	  );
+      '#title' => t('Available Functions'),
+      '#options' => $functions,
+      '#type' => 'select',
+      '#default_value' => $this->options['views_func_field_function'],
+      '#description' => t('Choose the function to execute. <i>Declare a function by implementing hook_views_func_field_function()</i>.'),
+    );
     $form['alter']['text']['#title'] = t('Function Arguments');
     $form['alter']['text']['#description'] = t('Enter one argument per line. You may use "Replacement Patterns" for function arguments.');
   }
