@@ -2,7 +2,7 @@
 
 /**
  * @file
- * views_handler_osprey_function.inc
+ * views_handler_views_func_field_function.inc
  */
 
 /**
